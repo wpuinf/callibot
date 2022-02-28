@@ -4,7 +4,8 @@
     "description": "",
     "dependencies": {
         "core": "*",
-        "radio": "*"
+        "radio": "*",
+        "callibot2": "github:knotechgmbh/callibot2#v0.1.1"
     },
     "files": [
         "README.md",
@@ -18,5 +19,5 @@
     "supportedTargets": [
         "calliopemini"
     ],
-    "preferredEditor": "blocksprj"
+    "preferredEditor": "tsprj"
 }
