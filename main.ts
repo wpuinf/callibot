@@ -1,3 +1,14 @@
+// Define types
+
+interface bumperObject {
+    left: boolean,
+    right: boolean,
+    both: boolean,
+    none: boolean
+}
+
+// Define functions
+
 function right (angle: number): void {
     calliBot2.motor(C2Motor.links, C2Dir.vorwärts, 50);
     calliBot2.motor(C2Motor.rechts, C2Dir.rückwärts, 50);
@@ -22,16 +33,19 @@ function drive (speed: number, time: number): void {
     basic.pause(time);
     calliBot2.motorStop(C2Motor.beide, C2Stop.Frei);
 };
-
-function bumperState(): {left: boolean, right: boolean, both: boolean, none: boolean} {
+function bumperState(): bumperObject {
     return {
         left: calliBot2.readBumperSensor(C2Sensor.links, C2State.an),
         right: calliBot2.readBumperSensor(C2Sensor.rechts, C2State.an),
         both: calliBot2.readBumperSensor(C2Sensor.links, C2State.an) && calliBot2.readBumperSensor(C2Sensor.rechts, C2State.an),
         none: !calliBot2.readBumperSensor(C2Sensor.links, C2State.an) && !calliBot2.readBumperSensor(C2Sensor.rechts, C2State.an)
-    }
+    };
 };
 
-basic.forever(function () {
+// Actual code
 
+basic.forever(() => {
+    if(bumperState().none) {
+        drive(101, 500);
+    }
 });
