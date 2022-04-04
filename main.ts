@@ -7,6 +7,28 @@ interface bumperObject {
     none: boolean
 }
 
+interface Position {
+    x: number,
+    y: number,
+    direction: number
+}
+
+enum Direction {
+    ForwardDir = 0,
+    LeftDir = 270,
+    RightDir = 90,
+    BackwardsDir = 180,
+}
+
+class WorldMap {
+    fields: boolean[][];
+    static fieldSize = 500;
+
+    setAt(x: number, y: number, value: boolean) {
+        this.fields[Math.floor(x / WorldMap.fieldSize)][Math.floor(y / WorldMap.fieldSize)] = value;
+    }
+}
+
 // Define functions
 
 function right (angle: number): void {
@@ -42,10 +64,18 @@ function bumperState(): bumperObject {
     };
 };
 
-// Actual code
+// Code that is ran at startup
+
+let map: boolean[][];
+let position: {x: number, y: number, direction: number};
+let distance: number = calliBot2.entfernung(C2Einheit.mm);
+
+
+//[X][X][ ][X][X][ ]
+//[X][ ][ ][ ][X][ ]
+//[X][ ][X][ ][X][X]
+//[X][X][X][ ][ ][ ]
 
 basic.forever(() => {
-    if(bumperState().none) {
-        drive(101, 500);
-    }
+
 });
